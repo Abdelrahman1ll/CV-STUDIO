@@ -139,8 +139,8 @@ const PremiumTemplate = ({ data, pageIndex = 0 }) => {
         {pageIndex === 0 && (
           <>
             {/* ABOUT */}
-            <section className="mb-6">
-              <div className="flex items-center gap-2 mb-6">
+            <section className="mb-4">
+              <div className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-8 bg-slate-100 rounded-sm"></div>
                 <h2 className="text-[24px] font-black text-[#334155] tracking-tight uppercase">
                   {data.sections?.about ?? "ABOUT"}

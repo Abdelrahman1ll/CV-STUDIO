@@ -43,7 +43,7 @@ const BasicTemplate = ({ data, pageIndex = 0 }) => {
         </header>
       )}
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* ABOUT */}
         {pageIndex === 0 && (
           <section>
