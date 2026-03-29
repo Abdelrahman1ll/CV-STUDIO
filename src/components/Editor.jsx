@@ -107,6 +107,57 @@ const Editor = ({ data, template, onChange, activePage, onPageChange }) => {
     </div>
   );
 
+  const personalSkillsSection = (
+    <section className={sectionClass}>
+      {renderSectionHeader(
+        "personalSkills",
+        <Star size={16} className="text-indigo-500" />,
+        "PERSONAL SKILLS",
+      )}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {(data.personalSkills || []).map((skill, i) => (
+          <div
+            key={i}
+            className="flex items-center gap-1 bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-lg text-xs font-bold border border-indigo-100 animate-in zoom-in duration-300 tracking-tight"
+          >
+            {skill}
+            <button
+              onClick={() => removeItem("personalSkills", i)}
+              className="text-indigo-300 hover:text-red-500 ml-1"
+            >
+              <Trash2 size={10} />
+            </button>
+          </div>
+        ))}
+      </div>
+      <div className="flex gap-2">
+        <input
+          id="personal-skill-input-unique"
+          className={inputClass}
+          placeholder="Add skill..."
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && e.target.value) {
+              addItem("personalSkills", e.target.value);
+              e.target.value = "";
+            }
+          }}
+        />
+        <button
+          onClick={() => {
+            const input = document.getElementById("personal-skill-input-unique");
+            if (input?.value) {
+              addItem("personalSkills", input.value);
+              input.value = "";
+            }
+          }}
+          className="p-3 bg-indigo-600 text-white rounded-lg shadow-lg hover:bg-indigo-500"
+        >
+          <Plus size={18} />
+        </button>
+      </div>
+    </section>
+  );
+
   return (
     <div className="h-full overflow-y-auto p-6 bg-slate-50 border-r border-slate-200 w-full lg:w-96 custom-scrollbar">
       <div className="flex justify-between items-center mb-6">
@@ -453,6 +504,8 @@ const Editor = ({ data, template, onChange, activePage, onPageChange }) => {
             </div>
           </section>
 
+          {template === "basic" && personalSkillsSection}
+
           <button
             onClick={() => onPageChange(1)}
             className="w-full p-4 bg-slate-900 text-white rounded-2xl font-black text-xs uppercase tracking-[3px] flex items-center justify-center gap-3 hover:bg-slate-800 transition-all shadow-xl"
@@ -730,55 +783,8 @@ const Editor = ({ data, template, onChange, activePage, onPageChange }) => {
             </button>
           </section>
 
-          {/* Personal Skills */}
-          <section className={sectionClass}>
-            {renderSectionHeader(
-              "personalSkills",
-              <Star size={16} className="text-indigo-500" />,
-              "PERSONAL SKILLS",
-            )}
-            <div className="flex flex-wrap gap-2 mb-4">
-              {(data.personalSkills || []).map((skill, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-1 bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-lg text-xs font-bold border border-indigo-100 animate-in zoom-in duration-300 uppercase tracking-tight"
-                >
-                  {skill}
-                  <button
-                    onClick={() => removeItem("personalSkills", i)}
-                    className="text-indigo-300 hover:text-red-500 ml-1"
-                  >
-                    <Trash2 size={10} />
-                  </button>
-                </div>
-              ))}
-            </div>
-            <div className="flex gap-2">
-              <input
-                id="pskill-input"
-                className={inputClass}
-                placeholder="Add skill..."
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && e.target.value) {
-                    addItem("personalSkills", e.target.value.toUpperCase());
-                    e.target.value = "";
-                  }
-                }}
-              />
-              <button
-                onClick={() => {
-                  const input = document.getElementById("pskill-input");
-                  if (input.value) {
-                    addItem("personalSkills", input.value.toUpperCase());
-                    input.value = "";
-                  }
-                }}
-                className="p-3 bg-indigo-600 text-white rounded-lg shadow-lg hover:bg-indigo-500"
-              >
-                <Plus size={18} />
-              </button>
-            </div>
-          </section>
+          {/* Personal Skills (Conditionally Rendered) */}
+          {template === "premium" && personalSkillsSection}
 
           <button
             onClick={() => onPageChange(0)}

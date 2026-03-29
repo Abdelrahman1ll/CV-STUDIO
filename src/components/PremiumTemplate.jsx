@@ -327,7 +327,7 @@ const PremiumTemplate = ({ data, pageIndex = 0 }) => {
             <section className="mb-4">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-8 bg-slate-100 rounded-sm"></div>
-                <h2 className="text-[24px] font-black text-[#334155] tracking-tight uppercase">
+                <h2 className="text-[24px] font-black text-[#334155] tracking-tight">
                   {data.sections?.personalSkills ?? "PERSONAL SKILLS"}
                 </h2>
               </div>
@@ -335,7 +335,7 @@ const PremiumTemplate = ({ data, pageIndex = 0 }) => {
                 {(data.personalSkills || []).map((skill, i) => (
                   <div
                     key={i}
-                    className="bg-[#f5f3ff] text-[#6366f1] px-5 py-2 rounded-xl text-[12px] font-black tracking-tight whitespace-nowrap uppercase"
+                    className="bg-[#f5f3ff] text-[#6366f1] px-5 py-2 rounded-xl text-[12px] font-black tracking-tight whitespace-nowrap"
                   >
                     {skill}
                   </div>
