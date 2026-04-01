@@ -18,8 +18,8 @@ const Preview = ({ data, template, onChange, activePage, onPageChange }) => {
         const availableWidth = entry.contentRect.width;
         const cvWidthPx = 794; // precise A4 width in pixels at standard DPI
         
-        // Use all available width exactly
-        let newScale = availableWidth / cvWidthPx; 
+        // Zoom out the CV just a slight bit
+        let newScale = (availableWidth - 64) / cvWidthPx;
         if (newScale > 1) newScale = 1;
         if (newScale < 0.2) newScale = 0.2;
         
@@ -126,7 +126,7 @@ const Preview = ({ data, template, onChange, activePage, onPageChange }) => {
                       e.stopPropagation();
                       handleDeletePage(i);
                     }}
-                    className="absolute -right-16 top-0 p-3 bg-red-500/10 text-red-500 border border-red-500/20 rounded-xl hover:bg-red-500 hover:text-white transition-all no-print group/del"
+                    className="absolute -right-8 top-1 p-3 bg-red-500/10 text-red-500 border border-red-500/20 rounded-xl hover:bg-red-500 hover:text-white transition-all no-print group/del z-40"
                     title="Delete Page"
                   >
                     <Trash2 size={20} />
@@ -178,7 +178,7 @@ const Preview = ({ data, template, onChange, activePage, onPageChange }) => {
           <div className="mt-8 mb-20 flex justify-center w-full" style={{ transform: `scale(${uiScale})`, transformOrigin: 'top center' }}>
             <button
               onClick={handleAddPage}
-              className="group px-8 md:px-10 py-5 bg-indigo-600/10 border-2 border-dashed border-indigo-500/30 rounded-[30px] text-indigo-400 font-black text-sm uppercase tracking-[3px] md:tracking-[5px] flex items-center justify-center gap-3 md:gap-4 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-all active:scale-95 no-print shadow-2xl text-center"
+              className="group px-6 md:px-10 py-4 md:py-5 bg-indigo-600/10 border-2 border-dashed border-indigo-500/30 rounded-[30px] text-indigo-400 font-black text-xs sm:text-sm uppercase tracking-[2px] sm:tracking-[5px] flex flex-row flex-nowrap items-center justify-center gap-2 sm:gap-4 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-all active:scale-95 no-print shadow-2xl text-center whitespace-nowrap"
             >
               <Plus
                 size={24}
